@@ -59,3 +59,12 @@ refine_original$`Product category` =
        refine_original$`Product category`)
 
 ## 4: Add full address for geocoding
+
+refine_original =
+  unite(refine_original, "full_address", 
+        c("address", "city", "country"), sep = ", ")
+
+## 5: Create dummy variables for company and product category
+
+refine_original = 
+  refine_original$company_philips
