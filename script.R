@@ -16,7 +16,6 @@ refine_original$company =
   gsub(pattern = "phlips", replacement = "philips",
        refine_original$company, ignore.case = T)
 
-write.csv(refine_original, file = "refine_clean.csv")
 
 refine_original$company = 
   gsub(pattern = "akzo", replacement = "akzo",
@@ -133,3 +132,5 @@ refine_original = refine_original %>%
   bind_cols(as_data_frame(product_tablet)) %>% 
   select(-p_tablet) %>% 
   rename(product_tablet = value)
+
+write.csv(refine_original, file = "refine_clean.csv")
