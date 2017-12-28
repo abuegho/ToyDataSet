@@ -16,6 +16,8 @@ refine_original$company =
   gsub(pattern = "phlips", replacement = "philips",
        refine_original$company, ignore.case = T)
 
+write.csv(refine_original, file = "refine_clean.csv")
+
 refine_original$company = 
   gsub(pattern = "akzo", replacement = "akzo",
        refine_original$company, ignore.case = T)
