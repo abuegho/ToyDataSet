@@ -66,5 +66,68 @@ refine_original =
 
 ## 5: Create dummy variables for company and product category
 
-refine_original = 
-  refine_original$company_philips
+refine_original = refine_original %>% 
+  group_by(company) %>% 
+  mutate(c_philips = company == "philips")
+company_philips = sapply(refine_original$c_philips, as.integer)
+refine_original = refine_original %>% 
+  bind_cols(as_data_frame(company_philips)) %>% 
+  select(-c_philips) %>% 
+  rename(company_philips = value)
+
+refine_original = refine_original %>% 
+  mutate(c_akzo = company == "akzo")
+company_akzo = sapply(refine_original$c_akzo, as.integer)
+refine_original = refine_original %>% 
+  bind_cols(as_data_frame(company_akzo)) %>% 
+  select(-c_akzo) %>% 
+  rename(company_akzo = value)
+
+refine_original = refine_original %>% 
+  mutate(c_van = company == "van houten")
+company_van = sapply(refine_original$c_van, as.integer)
+refine_original = refine_original %>% 
+  bind_cols(as_data_frame(company_van)) %>% 
+  select(-c_van) %>% 
+  rename(company_van_houten = value)
+
+refine_original = refine_original %>% 
+  mutate(c_unilever = company == "unilever")
+company_unilever = sapply(refine_original$c_unilever, as.integer)
+refine_original = refine_original %>% 
+  bind_cols(as_data_frame(company_unilever)) %>% 
+  select(-c_unilever) %>% 
+  rename(company_unilever = value)
+
+refine_original = mutate(refine_original, p_smartphone = 
+                           `Product category` == "Smartphone")
+refine_original = mutate(refine_original, p_laptop = 
+                           `Product category` == "Laptop")
+refine_original = mutate(refine_original, p_tv = 
+                           `Product category` == "TV")
+refine_original = mutate(refine_original, p_tablet = 
+                           `Product category` == "Tablet")
+
+product_smartphone = sapply(refine_original$p_smartphone, as.integer)
+refine_original = refine_original %>% 
+  bind_cols(as_data_frame(product_smartphone)) %>% 
+  select(-p_smartphone) %>% 
+  rename(product_smartphone = value)
+
+product_laptop = sapply(refine_original$p_laptop, as.integer)
+refine_original = refine_original %>% 
+  bind_cols(as_data_frame(product_laptop)) %>% 
+  select(-p_laptop) %>% 
+  rename(product_laptop = value)
+
+product_tv = sapply(refine_original$p_tv, as.integer)
+refine_original = refine_original %>% 
+  bind_cols(as_data_frame(product_tv)) %>% 
+  select(-p_tv) %>% 
+  rename(product_tv = value)
+
+product_tablet = sapply(refine_original$p_tablet, as.integer)
+refine_original = refine_original %>% 
+  bind_cols(as_data_frame(product_tablet)) %>% 
+  select(-p_tablet) %>% 
+  rename(product_tablet = value)
